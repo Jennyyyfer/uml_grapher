@@ -10,3 +10,8 @@ The project requires a JDK 17 (recommended distribution is Temurin from [Adoptiu
 From there, simply use the Maven wrapper to launch all tests (unit tests & integration tests).
 
 `./mvnw verify`
+
+# maven_training
+
+![build CI](https://github.com/<Jennyyyfer>/<maven_training>/actions/workflows/<Build>/badge.svg)
+![couverture par les tests](https://codecov.io/gh/<Jennyyyfer>/<maven_trainingt>/settings/badge)
