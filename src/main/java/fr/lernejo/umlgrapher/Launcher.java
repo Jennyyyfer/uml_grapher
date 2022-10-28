@@ -1,22 +1,25 @@
 package fr.lernejo.umlgrapher;
 
 import picocli.CommandLine;
+import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
+import java.util.concurrent.Callable;
 
-public class Launcher implements Runnable{
 
-        @Option(names = {"-c", "--classes"}, description = "Fill in the classes from which to base the analysis")
-        private final Class<?>[] classes = null;
-        @Option(names = {"-g", "--graph-type"}, description = "Select the type of graph you want to output")
-        private final GraphType grType= GraphType.Mermaid;
+@Command(name = "launcher", mixinStandardHelpOptions = true, version = "UMLGraph 1.0", description = "UMLGraph")
+    public class Launcher implements Callable<Integer> {
+
+        @Option(names = {"-c", "--classes"}, required = true, description = "Fill in the classes from which to base the analysis")
+        private Class<?>[] classes;
+        @Option(names = {"-g", "--graph-type"}, defaultValue = "Mermaid", description = "Select the type of graph you want to output")
+        private String grType;
 
         @Override
-        public void run() {
-
+        public Integer call() throws Exception {
             UmlGraph graph = new UmlGraph(classes);
-            String st = graph.as(grType);
-            System.out.println(st);
+            System.out.println(graph.as(GraphType.valueOf(grType)));
+            return null;
         }
         // this example implements Callable, so parsing, error handling and handling user
         // requests for usage help or version help can be done with one line of code.
